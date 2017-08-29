@@ -1,0 +1,15 @@
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\SDKApp.exe.config
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\SDKApp.exe
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\SDKApp.pdb
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\CACertificate.dll
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\CACertificate.pdb
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.csprojResolveAssemblyReference.cache
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.Form1.resources
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.Properties.Resources.resources
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.csproj.GenerateResource.Cache
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.exe
+C:\Users\N.Navaseelan\Desktop\lc\wa-casecurity\CASecurity.API\SDKApp\obj\Debug\SDKApp.pdb

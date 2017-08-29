@@ -1,0 +1,8 @@
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\bin\Release\CACertificate.dll
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\bin\Release\CACertificate.pdb
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\CACertificate.csprojResolveAssemblyReference.cache
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\Interop.CERTCLILib.dll
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\Interop.CERTENROLLLib.dll
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\CACertificate.csproj.ResolveComReference.cache
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\CACertificate.dll
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CACertificate\obj\Release\CACertificate.pdb

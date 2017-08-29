@@ -1,0 +1,2 @@
+C:\Users\N.Navaseelan\Desktop\LC\CASecurity.API\CASecurity.API.Tests\obj\Debug\CASecurity.API.Tests.csprojResolveAssemblyReference.cache
+C:\Users\N.Navaseelan\Desktop\LC\WA-CASecurity\CASecurity.API\CASecurity.API.Tests\obj\Debug\CASecurity.API.Tests.csprojResolveAssemblyReference.cache

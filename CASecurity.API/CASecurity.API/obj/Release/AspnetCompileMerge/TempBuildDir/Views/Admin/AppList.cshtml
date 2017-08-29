@@ -1,0 +1,77 @@
+﻿@model CASecurity.API.Models.ApplistModel
+
+@{
+    Layout = null;
+}
+
+ <div class="col-lg-12">
+        <div class="row">
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        @*<th>Address </th>*@
+                        <th>PlatForm</th>
+                        <th>Package</th>
+                        <th>Production</th>
+                        <th>SandBox</th>
+                        <th>JustPayCode</th>
+                        <th>SDK Issued Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Apps)
+                    {
+                        <tr>
+                            @*<td>
+                            @item.Id
+                        </td>*@
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Code
+                            </td>
+                            @*<td>
+                                @item.Address
+
+                            </td>*@
+                            <td>
+                                @item.PlatForm
+
+                            </td>
+                            <td>
+                                @item.Package
+                            </td>
+                            <td>
+                                @item.Production
+                            </td>
+                            <td>
+                                @item.SandBox
+                            </td>
+                            <td>
+                                @item.JustPayCode
+                            </td>
+                            <td>
+                                @item.SDKIssuedDateTime
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
