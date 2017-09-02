@@ -1,13 +1,13 @@
 ﻿using CASecurity.Web.Models;
-using CASecurity.Web.Service;
 using Castle.Core.Logging;
 using System.Collections.Generic;
 using CASecurity.Web.ViewModelBuilders;
 using System.Web.Mvc;
-using CASecurity.Web.Domain;
 using System.Linq;
 using System;
 using System.IO;
+using CASecurity.Service;
+using CASecurity.Domain.Dtos;
 
 namespace CASecurity.Web.Controllers
 {
@@ -24,7 +24,7 @@ namespace CASecurity.Web.Controllers
             _service = new BankService();
             _merchantService = new MerchantService();
             _appService = new AppService();
-            _viewModelBuilder = new ViewModelBuilder(_service, _merchantService, _appService);
+            //_viewModelBuilder = new ViewModelBuilder(_service, _merchantService, _appService);
         }
 
         public ActionResult Bank()

@@ -13,7 +13,7 @@ namespace CASecurity.Web.Infrastructure
         {
 
             //container.Register(Component.For(typeof(IRepository))
-            //                            .ImplementedBy((typeof(CASecurity.API.Repository.Repository)))
+            //                            .ImplementedBy((typeof(CASecurity.Web.Repository.Repository)))
             //                            .LifestylePerWebRequest());
 
             container.Register(Component.For<ICAService>()
