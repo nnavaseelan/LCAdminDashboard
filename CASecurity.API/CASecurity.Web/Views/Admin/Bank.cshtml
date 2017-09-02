@@ -1,0 +1,137 @@
+﻿@model IEnumerable<CASecurity.API.Models.BankModel>
+
+@{
+    ViewBag.Title = "Bank";
+}
+<script src="~/Scripts/Views/bank.js"></script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <h4>Banks</h4>
+            <button id="btnCreate" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Create</button><br />
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                    <tr>
+                        @*<th>#</th>*@
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Address </th>
+                        <th>Contact Person Name </th>
+                        <th>Contact Person Email Id </th>
+                        <th>Contact Person Mobile No </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>
+                                @item.Id
+                            </td>*@
+                            <td>
+                               
+                                 @item.Name
+                               
+                            </td>
+                            <td>
+                                @item.Code
+                            </td>
+                            <td>
+                                @item.Address
+                                
+                            </td>
+                            <td>
+                                @item.ContactPersonName
+
+                            </td>
+                            <td>
+                                @item.ContactPersonEmailId
+
+                            </td>
+                            <td>
+                                @item.ContactPersonMobileNo
+
+                            </td>
+
+                            <td>
+                                @*<button class="btn btn-success">Modify</button>*@
+                                <button class="btn btn-danger">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Bank</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm" name="createForm" role="form" novalidate class="form-validation" action="~/Admin/Bank" method="post">
+                        <div class="form-group">
+                            @Html.Hidden("BankId","")
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label for="Name"> Name</label>
+                                    <input type="text" class="form-control" name="Name" placeholder="bank name" required maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label for="Code"> Code</label>
+                                    <input type="text" class="form-control" name="Code" placeholder="bank code" required maxlength="4" minlength="4">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label> Address</label>
+                                    <input type="text" class="form-control" name="Address" placeholder="bank address" required maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label> Contact Person Name</label>
+                                    <input type="text" class="form-control" name="ContactPersonName" placeholder="person name" required maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label> Contact Person Email Id</label>
+                                    <input type="text" class="form-control" name="ContactPersonEmailId" placeholder="email id" required maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label>Contact Person Mobile No</label>
+                                    <input type="text" class="form-control" name="ContactPersonMobileNo" placeholder="mobile no " required maxlength="60">
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="btnSave" type="submit" class="btn  btn-success">Create</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
