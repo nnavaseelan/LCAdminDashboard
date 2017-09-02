@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace CASecurity.Web.Service
+namespace CASecurity.Service
 {
     public interface ICAService: IDisposable
     {
