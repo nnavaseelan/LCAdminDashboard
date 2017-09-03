@@ -1,5 +1,6 @@
 ﻿using CASecurity.Domain.Dtos;
 using CASecurity.Domain.Migrations;
+using CASecurity.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,60 +10,47 @@ namespace CASecurity.Service
 {
     public interface IBankService
     {
-        void InsertBank(Bank bank);
-        Bank GetBank(Guid id);
-        void UpdateBank(Bank bank);
-        void DeleteBank(Guid id);
-        List<Bank> GetBanks();
+        void Save(Bank bank);
+        Bank Get(Guid id);
+        void Delete(Guid id);
+        List<Bank> Get();
 
     }
     public class BankService : IBankService
     {
-        public void DeleteBank(Guid id)
+        private readonly IBankRepository repository;
+
+        public BankService()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var bank = new Bank { Id = id };
-                db.Banks.Attach(bank);
-                db.Entry(bank).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
+            repository = new BankRepository();
         }
 
-        public Bank GetBank(Guid id)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Banks.FirstOrDefault(q => q.Id == id);
 
-            }
+        public void Delete(Guid id)
+        {
+            repository.Delete(id);
         }
 
-        public List<Bank> GetBanks()
+        public Bank Get(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Banks.Where(q => q.IsActive).ToList();
-
-            }
+            return repository.Get(id);
         }
 
-        public void InsertBank(Bank bank)
+        public List<Bank> Get()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Banks.Add(bank);
-                db.SaveChanges();
-            }
+            return repository.Get();
         }
 
-        public void UpdateBank(Bank bank)
+        public void Save(Bank bank)
         {
-            using (var db = new ApplicationDbContext())
+            if (bank.Id == new Guid())
             {
-                db.Banks.Attach(bank);
-                db.Entry(bank).State = EntityState.Modified;
-                db.SaveChanges();
+                bank.Id = Guid.NewGuid();
+                repository.Insert(bank);
+            }
+            else
+            {
+                repository.Update(bank);
             }
         }
     }

@@ -67,6 +67,9 @@
     <Compile Include="Dtos\UserDeviceLog.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BankRepository.cs" />
+    <Compile Include="Repository\IBankRepository.cs" />
+    <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\Repository.cs" />

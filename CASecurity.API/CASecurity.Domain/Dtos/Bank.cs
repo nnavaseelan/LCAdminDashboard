@@ -8,9 +8,8 @@ using System.Web;
 namespace CASecurity.Domain.Dtos
 {
     public class Bank : Dto
-    {                
+    {
         public string Name { get; set; }
-       // [StringLength(4)]
         public string Code { get; set; }
         public string Address { get; set; }
         public string ContactPersonName { get; set; }
@@ -21,11 +20,7 @@ namespace CASecurity.Domain.Dtos
         public virtual ICollection<Merchant> Merchants { get; set; }
         public Bank()
         {
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
         }
-
     }
-  
- 
-   
 }

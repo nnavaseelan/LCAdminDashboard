@@ -7,11 +7,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    
+    @Scripts.Render("~/bundles/common")
+
     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>*@
+        <script src="~/Scripts/jquery.validate.min.js"></script>*@
     @*<script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>*@
+        <script src="~/Scripts/jquery.validate.min.js"></script>*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -43,8 +44,20 @@
         </footer>
     </div>
 
- 
+    <!--Confirm message-->
+    <div id="confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-body" id="confirmMessage">
+                Are you sure?
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okBtn">Remove</button>
+                <button type="button" data-dismiss="modal" class="btn" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts",required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

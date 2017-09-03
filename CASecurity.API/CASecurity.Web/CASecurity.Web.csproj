@@ -278,6 +278,7 @@
     <Compile Include="Providers\RandomOAuthStateGenerator.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\CastDomainHelper.cs" />
     <Compile Include="ViewModelBuilder\ViewModelBuilder.cs" />
     <Compile Include="WindsorContainerWrapper.cs" />
   </ItemGroup>
@@ -322,6 +323,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Views\apps.js" />
+    <Content Include="Scripts\Views\common.js" />
     <Content Include="Scripts\Views\merchant.js" />
     <Content Include="Scripts\Views\bank.js" />
     <Content Include="Scripts\Views\login.js" />
@@ -351,6 +353,7 @@
     <Content Include="Views\Admin\Test.cshtml" />
     <Content Include="Views\Admin\AppList.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Admin\_CreateBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
