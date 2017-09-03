@@ -1,9 +1,8 @@
-﻿$(document).ready(function()
-{
+﻿$(document).ready(function () {
     //alert("loading");
     $('#btnSave').click(function (e) {
-       e.preventDefault();      
-       $('#createForm').submit();
+        e.preventDefault();
+        $('#createForm').submit();
 
         //$("form[name='createForm']").validate({
         //    // Specify validation rules
@@ -40,14 +39,54 @@
         //        form.submit();
         //    }
         //});
-        
+
     });
-        
- 
 
     $('#btnCreate').click(function () {
-        $('#myModal input:first-child').focus();
-        $('#myModal').modal();
+        debugger;
+        $.ajax({
+            type: "GET",
+            url: "/Admin/CreateMerchant",
+            contentType: "application/json; charset=utf-8",
+            data: { "Id": 0 },
+            datatype: "json",
+            success: function (data) {
+                debugger;
+                $("#createMerchant").html(data);
+                $('#myModal input:first-child').focus();
+                $('#myModal').modal();
+
+            },
+            error: function () {
+                console.log("Dynamic content load failed.");
+            }
+        });
     });
+
+    $('.btnEdit').click(function () {
+        debugger;
+        var id = $(this).data("id");
+        $.ajax({
+            type: "GET",
+            url: "/Admin/CreateMerchant",
+            contentType: "application/json; charset=utf-8",
+            data: { "Id": id },
+            datatype: "json",
+            success: function (data) {
+                debugger;
+                $("#createMerchant").html(data);
+                $('#myModal input:first-child').focus();
+                $('#myModal').modal();
+            },
+            error: function () {
+                console.log("Dynamic content load failed.");
+            }
+        });
+    });
+
+    //$('#btnCreate').click(function () {
+    //    $('#myModal input:first-child').focus();
+    //    $('#myModal').modal();
+    //});
 
 });

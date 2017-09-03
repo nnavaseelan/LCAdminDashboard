@@ -28,6 +28,7 @@ namespace CASecurity.Web.Controllers
             _viewModelBuilder = new ViewModelBuilder(_bankService, _merchantService, _appService);
         }
 
+        #region Bank
         public ActionResult Bank()
         {
             var model = new List<BankModel>();
@@ -97,23 +98,16 @@ namespace CASecurity.Web.Controllers
 
             return RedirectToAction("Bank");
         }
+        #endregion
 
+
+        #region Merchant
         public ActionResult Merchant()
         {
             var model = new List<MerchantModel>();
             try
             {
-
-                var list = (from l in _bankService.Get()
-                            where l.IsActive && l.Name != null
-                            select new SelectListItem
-                            {
-                                Text = l.Name,
-                                Value = l.Id.ToString()
-                            });
-
                 model = _viewModelBuilder.GetMerchants();
-                ViewBag.Banks = list;
             }
             catch (Exception ex)
             {
@@ -123,25 +117,43 @@ namespace CASecurity.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult CreateMerchant(string id)
+        {
+            var model = new MerchantModel();
+            try
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    model = _viewModelBuilder.GetMerchant(id);
+                }
+
+                var list = (from l in _bankService.Get()
+                            where l.IsActive && l.Name != null
+                            select new SelectListItem
+                            {
+                                Text = l.Name,
+                                Value = l.Id.ToString()
+                            });
+
+                ViewBag.Banks = list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return PartialView("_CreateMerchant", model);
+        }
+
         [HttpPost]
-        public ActionResult Merchant(MerchantModel model)
+        public ActionResult CreateMerchant(MerchantModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var merchant = new Merchant
-                    {
-                        Name = model.Name,
-                        Code = model.Code,
-                        Address = model.Address,
-                        BankId = new Guid(model.BankId),
-                        BRC = model.BRC,
-                        IsActive = true,
-                        CreatedDateTime = System.DateTime.Now
-                    };
-
-                    _merchantService.InsertMerchant(merchant);
+                    _viewModelBuilder.SaveMerchant(model);
                 }
             }
             catch (Exception ex)
@@ -151,6 +163,25 @@ namespace CASecurity.Web.Controllers
 
             return RedirectToAction(model.RedirectTo);
         }
+
+        public ActionResult DeleteMerchant(Guid id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _merchantService.Delete(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return RedirectToAction("Merchant");
+        }
+        #endregion
+
         public ActionResult App(string id)
         {
             var model = new BankMerchantModel
@@ -170,7 +201,7 @@ namespace CASecurity.Web.Controllers
                                  Value = l.Id.ToString()
                              }).ToList();
 
-                var merchants = (from l in _merchantService.GetMerchants()
+                var merchants = (from l in _merchantService.Get()
                                  where l.IsActive && l.Name != null
                                  select new SelectListItem
                                  {
@@ -238,7 +269,7 @@ namespace CASecurity.Web.Controllers
                     //get bank
                     var bankCode = _bankService.Get(new Guid(model.BankId)).Code;
                     //get merchant
-                    var merchantCode = _merchantService.GetMerchant(new Guid(model.MerchantId)).Code;
+                    var merchantCode = _merchantService.Get(new Guid(model.MerchantId)).Code;
 
                     var app = new App
                     {

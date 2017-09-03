@@ -23,6 +23,7 @@ namespace CASecurity.Web.Models
         [MaxLength(4)]
         public string Code { get; set; }
         public bool IsActive { get; set; }
+
         public List<SelectListItem> Banks { get; set; }
         public string RedirectTo { get; set; }
 

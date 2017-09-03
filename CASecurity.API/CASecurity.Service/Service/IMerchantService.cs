@@ -1,6 +1,7 @@
 ﻿
 using CASecurity.Domain.Dtos;
 using CASecurity.Domain.Migrations;
+using CASecurity.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,57 +10,46 @@ namespace CASecurity.Service
 {
     public interface IMerchantService
     {
-        void InsertMerchant(Merchant merchant);
-        Merchant GetMerchant(Guid Id);
-        void UpdateMerchant(Merchant merchant);
-        void DeleteMerchant(Guid id);
-        List<Merchant> GetMerchants();
+        void Save(Merchant merchant);
+        Merchant Get(Guid Id);
+        void Delete(Guid id);
+        List<Merchant> Get();
     }
+
     public class MerchantService : IMerchantService
     {
-        public void DeleteMerchant(Guid id)
+        private readonly MerchantRepository repository;
+
+        public MerchantService()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var merchant = new Merchant { Id = id };
-                db.Merchants.Attach(merchant);
-                db.Entry(merchant).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
+            repository = new MerchantRepository();
         }
 
-        public Merchant GetMerchant(Guid id)
+        public void Delete(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return  db.Merchants.FirstOrDefault(q => q.Id == id);
-            }
+            repository.Delete(id);
         }
 
-        public List<Merchant> GetMerchants()
+        public Merchant Get(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return  db.Merchants.Where(q => q.IsActive).ToList();
-            }
+            return repository.Get(id);
         }
 
-        public  void InsertMerchant(Merchant merchant)
+        public List<Merchant> Get()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Merchants.Add(merchant);
-                db.SaveChanges();
-            }
+            return repository.Get();
         }
 
-        public void UpdateMerchant(Merchant merchant)
+        public void Save(Merchant merchant)
         {
-            using (var db = new ApplicationDbContext())
+            if (merchant.Id == new Guid())
             {
-                db.Merchants.Attach(merchant);
-                db.Entry(merchant).State = EntityState.Modified;
-                db.SaveChanges();
+                merchant.Id = Guid.NewGuid();
+                repository.Insert(merchant);
+            }
+            else
+            {
+                repository.Update(merchant);
             }
         }
     }

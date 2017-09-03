@@ -1,0 +1,66 @@
+﻿@model CASecurity.Web.Models.MerchantModel
+<div>
+    @{ Html.EnableClientValidation(); }
+
+    @Html.BeginForm("CreateMerchant", "Admin", FormMethod.Post)
+    {
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Merchant</h4>
+        </div>
+        <div class="modal-body">
+            <form id="createForm" name="createForm" role="form" novalidate class="form-validation" action="~/Admin/Merchant" method="post">
+                <div class="form-group">
+                    @Html.Hidden("MerchantId", "")
+                    @Html.Hidden("RedirectTo", "Merchant")
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Name"> Bank</label>
+                            @Html.DropDownList("BankId", new SelectList(ViewBag.Banks, "Value", "Text"), new { @class = "dropdown" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Name"> Name</label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "merchant name", @maxlength = "60" })
+                            @*<input type="text" class="form-control" name="Name" placeholder="merchant name" required maxlength="60">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Code"> Code</label>
+                            @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @placeholder = "merchant code", @maxlength = "4", @minlength = "4" })
+                            @*<input type="text" class="form-control" name="Code" placeholder="merchant code" required maxlength="4" minlength="4">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label> Address</label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control", @placeholder = "merchant address", @maxlength = "60" })
+                            @*<input type="text" class="form-control" name="Address" placeholder="merchant address" required maxlength="60">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label> BRC</label>
+                            @Html.TextBoxFor(x => x.BRC, new { @class = "form-control", @placeholder = "brc", @maxlength = "60"})
+                            @*<input type="text" class="form-control" name="BRC" placeholder="brc" required maxlength="60">*@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="btnSave" type="submit" class="btn  btn-success">Save</button>
+        </div>
+    </div>
+    }
+</div>

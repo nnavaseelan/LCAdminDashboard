@@ -19,7 +19,7 @@ namespace CASecurity.Domain.Dtos
         public DateTime CreatedDateTime { get; set; }
         public Merchant()
         {
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
         }
     }
 

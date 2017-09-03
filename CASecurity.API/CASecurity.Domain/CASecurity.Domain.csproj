@@ -70,8 +70,10 @@
     <Compile Include="Repository\BankRepository.cs" />
     <Compile Include="Repository\IBankRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
+    <Compile Include="Repository\IMerchantRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\MerchantRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
