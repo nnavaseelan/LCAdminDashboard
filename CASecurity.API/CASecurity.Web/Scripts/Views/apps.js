@@ -1,7 +1,7 @@
 ﻿$(document).ready(function()
 {
     loadAppList();
-    //alert("loading");
+
     $('#btnSave').click(function (e) {
         e.preventDefault();
 
@@ -28,47 +28,86 @@
         });
 
     });
-    $('#btnAppSave').click(function (e) {
-        e.preventDefault;
 
-        var formData = {
-            'BankId': $('#BankId').val(),
-            'MerchantId': $('#MerchantId').val(),
-            //'BMCode': $('input[name=BMCode]').val(),
-            'Name': $('input[name=AppName]').val(),
-            'Package': $('input[name=AppPackage]').val(),
-            'Address': $('input[name=AppAddress]').val(),
-            'Code': $('input[name=AppCode]').val(),
-            'PlatForm': $('input[name=AppPlatForm]').val(),
-            'Production': $('input[name=AppProduction]').val(),
-            'SandBox': $('input[name=AppSandBox]').val(),
-            'JustPayCode': '-'
-        };
+    //$('#btnAppSave').click(function (e) {
+    //    e.preventDefault;
+
+    //    var formData = {
+    //        'BankId': $('#BankId').val(),
+    //        'MerchantId': $('#MerchantId').val(),
+    //        //'BMCode': $('input[name=BMCode]').val(),
+    //        'Name': $('input[name=AppName]').val(),
+    //        'Package': $('input[name=AppPackage]').val(),
+    //        'Address': $('input[name=AppAddress]').val(),
+    //        'Code': $('input[name=AppCode]').val(),
+    //        'PlatForm': $('input[name=AppPlatForm]').val(),
+    //        'Production': $('input[name=AppProduction]').val(),
+    //        'SandBox': $('input[name=AppSandBox]').val(),
+    //        'JustPayCode': '-'
+    //    };
     
+    //    $.ajax({
+    //        url: "/Admin/App",
+    //        type: "post",
+    //        data: formData,
+    //        success: function (d) {
+    //            loadAppList();
+    //            clearAppInputs();
+    //        }
+    //    });
+
+    //});
+
+    $('#btnAddMerchant').click(function () {
         $.ajax({
-            url: "../Admin/App",
-            type: "post",
-            data: formData,
-            success: function (d) {
-                loadAppList();
-                clearAppInputs();
+            type: "GET",
+            url: "/Admin/CreateMerchant",
+            contentType: "application/json; charset=utf-8",
+            data: { "Id": 0 },
+            datatype: "json",
+            success: function (data) {
+                debugger;
+                $("#createMerchant").html(data);
+                var selectedBank = $('#BankId option:selected').val();
+                $("#createMerchant").find("#BankId").val(selectedBank);
+                $("#createMerchant").find("#BankId").addClass("disabled");
+                $("#RedirectTo").val("App")
+                $('#createMerchantModel input:first-child').focus();
+                $('#createMerchantModel').modal();
+            },
+            error: function () {
+                console.log("Dynamic content load failed.");
+            }
+        });        
+    });
+    
+    $('#btnAddApp').click(function () {
+        //clearAppInputs();
+        //$('#myAppModal').modal();
+        debugger;
+        $.ajax({
+            type: "GET",
+            url: "/Admin/CreateApp",
+            contentType: "application/json; charset=utf-8",
+            data: { "Id": 0 },
+            datatype: "json",
+            success: function (data) {
+                debugger;
+                $("#createApp").html(data);
+                var selectedBank = $('#BankId option:selected').val();
+                $("#createAppModel").find("#BankId").val(selectedBank);
+
+                var selectedMerchant = $('#MerchantId option:selected').val();
+                $("#createAppModel").find("#MerchantId").val(selectedMerchant);
+
+
+                $('#createAppModel input:first-child').focus();
+                $('#createAppModel').modal();
+            },
+            error: function () {
+                console.log("Dynamic content load failed.");
             }
         });
-
-    });
-
-
-    $('#btnAdd').click(function () {
-        var bank = $('#BankId option:selected').text();
-        $('#spnBank').html(bank)
-        clearMerchantInputs();
-        $('#myModal').modal();
-    });
-
-
-    $('#btnAddApp').click(function () {
-        clearAppInputs();
-        $('#myAppModal').modal();
     });
 
     $('#MerchantId').change(function () {
@@ -92,6 +131,7 @@
                 $('#divAppList').html(data);
             })
     }
+
     function clearAppInputs() {
         $('input[name=AppName]').focus();
         $('input[name=AppName]').val("");
@@ -102,6 +142,7 @@
         $('input[name=AppProduction]').val("");
         $('input[name=AppSandBox]').val("");
     }
+
     function clearMerchantInputs() {
         $('input[name=Name]').focus();
         $('input[name=Name]').val("");
@@ -109,6 +150,4 @@
         $('input[name=Address]').val("");
         $('input[name=Code]').val("");
     }
-
-    
 });

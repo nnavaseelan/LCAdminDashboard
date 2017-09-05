@@ -32,6 +32,7 @@ namespace CASecurity.Web.Models
         public string MerchantId { get; set; }
         //[Required]
         public string BMCode { get; set; }
+
         public string JustPayCode { get; set; }
     }
 }

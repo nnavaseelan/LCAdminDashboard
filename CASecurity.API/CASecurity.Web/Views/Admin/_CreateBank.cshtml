@@ -2,70 +2,72 @@
 @model CASecurity.Web.Models.BankModel
 
 <div>
-    @{ Html.EnableClientValidation(); }
+    @{
+        Html.EnableClientValidation();
+    }
 
-    @Html.BeginForm("CreateBank", "Admin", FormMethod.Post)
+    @using (Html.BeginForm("CreateBank", "Admin", FormMethod.Post))
     {
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Bank</h4>
-        </div>
-        <div class="modal-body">
-            <form id="createForm" name="createForm" role="form" novalidate class="form-validation" action="~/Admin/Bank" method="post">
-                <div class="form-group">
-                    @Html.HiddenFor(x => x.Id)
+    <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bank</h4>
+            </div>
+            <div class="modal-body">
+                <form id="createForm" name="createForm" role="form" novalidate class="form-validation" action="~/Admin/Bank" method="post">
                     <div class="form-group">
-                        <div class="col-lg-12">
-                            <label for="Name"> Name</label>
-                            @Html.TextBoxFor(x => x.Name, new {@class = "form-control", @placeholder = "bank name", @maxlength = "60" })
-                            @*<input type="text" class="form-control" name="Name" placeholder="bank name" required maxlength="60">*@
+                        @Html.HiddenFor(x => x.Id)
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label for="Name"> Name</label>
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "bank name", @maxlength = "60" })
+                                @*<input type="text" class="form-control" name="Name" placeholder="bank name" required maxlength="60">*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label for="Code"> Code</label>
-                            @Html.TextBoxFor(x => x.Code, new {@class = "form-control", @placeholder = "bank code", @maxlength = "4", @minlength = "4" })
-                            @*<input type="text" class="form-control" name="Code" placeholder="bank code" required maxlength="4" minlength="4">*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label for="Code"> Code</label>
+                                @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @placeholder = "bank code", @maxlength = "4", @minlength = "4" })
+                                @*<input type="text" class="form-control" name="Code" placeholder="bank code" required maxlength="4" minlength="4">*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label> Address</label>
-                            @Html.TextBoxFor(x => x.Address, new {@class = "form-control", @placeholder = "bank address", @maxlength = "60" })
-                            @*<input type="text" class="form-control" name="Address" placeholder="bank address" required maxlength="60">*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label> Address</label>
+                                @Html.TextBoxFor(x => x.Address, new { @class = "form-control", @placeholder = "bank address", @maxlength = "60" })
+                                @*<input type="text" class="form-control" name="Address" placeholder="bank address" required maxlength="60">*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label> Contact Person Name</label>
-                            @Html.TextBoxFor(x => x.ContactPersonName, new {@class = "form-control",  @placeholder = "person name", @maxlength = "60" })
-                            @*<input type="text" class="form-control" name="ContactPersonName" placeholder="person name" required maxlength="60">*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label> Contact Person Name</label>
+                                @Html.TextBoxFor(x => x.ContactPersonName, new { @class = "form-control", @placeholder = "person name", @maxlength = "60" })
+                                @*<input type="text" class="form-control" name="ContactPersonName" placeholder="person name" required maxlength="60">*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label> Contact Person Email Id</label>
-                            @Html.TextBoxFor(x => x.ContactPersonEmailId, new {@class = "form-control",  @placeholder = "email id", @maxlength = "60" })
-                            @*<input type="text" class="form-control" name="ContactPersonEmailId" placeholder="email id" required maxlength="60">*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label> Contact Person Email Id</label>
+                                @Html.TextBoxFor(x => x.ContactPersonEmailId, new { @class = "form-control", @placeholder = "email id", @maxlength = "60" })
+                                @*<input type="text" class="form-control" name="ContactPersonEmailId" placeholder="email id" required maxlength="60">*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label>Contact Person Mobile No</label>
-                            @Html.TextBoxFor(x => x.ContactPersonMobileNo, new {@class = "form-control", @placeholder = "mobile no", @maxlength = "60" })
-                            @*<input type="text" class="form-control" name="ContactPersonMobileNo" placeholder="mobile no " required maxlength="60">*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label>Contact Person Mobile No</label>
+                                @Html.TextBoxFor(x => x.ContactPersonMobileNo, new { @class = "form-control", @placeholder = "mobile no", @maxlength = "60" })
+                                @*<input type="text" class="form-control" name="ContactPersonMobileNo" placeholder="mobile no " required maxlength="60">*@
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnSave" type="submit" class="btn  btn-success">Save</button>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button id="btnSave" type="submit" class="btn  btn-success">Save</button>
-        </div>
-    </div>
     }
 </div>

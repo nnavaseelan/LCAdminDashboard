@@ -19,3 +19,10 @@ function ConfirmDialog(ele, msg, okBtnName) {
         return true;
     });
 }
+
+$(function () {
+    //allow the validation framework to re-prase the DOM
+    jQuery.validator.unobtrusive.parse();
+
+    jQuery.validator.unobtrusive.parse("form");
+});

@@ -13,36 +13,52 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label for="Name" style="width:120px;"> Bank</label>
-                        @Html.DropDownList("BankId", new SelectList(ViewBag.Banks, "Value", "Text"), new { @class = "dropdown" })
+                        @Html.DropDownListFor(x => x.BankId, new SelectList(ViewBag.Banks, "Value", "Text"), new { @class = "dropdown" })
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="form-group">                        
+                    <div class="form-group">
                         <label for="Name" style="width:120px;">Merchants</label>
-                        @Html.DropDownList("MerchantId", new SelectList(ViewBag.Merchants, "Value", "Text"), new { @class = "dropdown" })
-                        <button id="btnAdd" class="btn btn-primary"><i class="fa fa-plus"></i>Add</button><br />
+                        @Html.DropDownListFor(x => x.MerchantId, new SelectList(ViewBag.Merchants, "Value", "Text"), new { @class = "dropdown" })
+                        <button id="btnAddMerchant" class="btn btn-primary"><i class="fa fa-plus"></i>Add</button><br />
                     </div>
                 </div>
                 @*<div class="col-lg-12">
-                    <div class="form-group">
-                        <label for="BMCode" style="width:120px;">Code</label>
-                        <input type="text"  style="width:80px;" name="BMCode" placeholder="code" required maxlength="4">
-                    </div>
-                </div>*@
+                        <div class="form-group">
+                            <label for="BMCode" style="width:120px;">Code</label>
+                            <input type="text"  style="width:80px;" name="BMCode" placeholder="code" required maxlength="4">
+                        </div>
+                    </div>*@
 
                 <div class="row">
                     <h4>App List</h4><button id="btnAddApp" class="btn btn-primary pull-right">Add</button><br />
-                                     
+
                 </div>
                 <div class="row">
-                    <div id="divAppList"></div>   
+                    <div id="divAppList"></div>
                 </div>
             </div>
-           -</div>
+            -
+        </div>
     </div>
 
 </div>
 <!--Merchant Modal -->
+<div class="modal fade" id="createMerchantModel" role="dialog">
+    <div class="modal-dialog">
+        <div id="createMerchant">
+        </div>
+    </div>
+</div>
+
+<!--App Modal -->
+<div class="modal fade" id="createAppModel" role="dialog">
+    <div class="modal-dialog">
+        <div id="createApp">
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
@@ -113,7 +129,7 @@
             </div>
             <div class="modal-body">
 
-                <div class="form-group">                                       
+                <div class="form-group">
 
                     <div class="form-group">
                         <div class="col-lg-12">
@@ -128,11 +144,11 @@
                         </div>
                     </div>
                     @*<div class="form-group">
-                        <div class="col-lg-12">
-                            <label> Address</label>
-                            <input type="text" class="form-control" name="AppAddress" placeholder="app address" required maxlength="60">
-                        </div>
-                    </div>*@
+                            <div class="col-lg-12">
+                                <label> Address</label>
+                                <input type="text" class="form-control" name="AppAddress" placeholder="app address" required maxlength="60">
+                            </div>
+                        </div>*@
                     <div class="form-group">
                         <div class="col-lg-12">
                             <label>App Code</label>
@@ -146,17 +162,17 @@
                         </div>
                     </div>
                     @*<div class="form-group">
-                        <div class="col-lg-12">
-                            <label> Production</label>
-                            <input type="text" class="form-control" name="AppProduction" placeholder="production" required maxlength="60">
+                            <div class="col-lg-12">
+                                <label> Production</label>
+                                <input type="text" class="form-control" name="AppProduction" placeholder="production" required maxlength="60">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <label> SandBox</label>
-                            <input type="text" class="form-control" name="AppSandBox" placeholder="sandBox" required maxlength="60">
-                        </div>
-                    </div>*@
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label> SandBox</label>
+                                <input type="text" class="form-control" name="AppSandBox" placeholder="sandBox" required maxlength="60">
+                            </div>
+                        </div>*@
 
 
                 </div>

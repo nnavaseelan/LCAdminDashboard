@@ -1,5 +1,6 @@
 ﻿using CASecurity.Domain.Dtos;
 using CASecurity.Domain.Migrations;
+using CASecurity.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,94 +14,70 @@ namespace CASecurity.Service
     {
         void InsertBankMerchant(BankMerchant bm);
         BankMerchant GetBankMerchant(Guid id);
-        BankMerchant FindBankMerchant(Guid bankId,Guid merchantId);
-        void InsertApp(App app);
-        App GetApp(Guid id);
-        void UpdateApp(App app);
-        void DeleteApp(Guid id);
-        List<App> GetApps();
+        BankMerchant FindBankMerchant(Guid bankId, Guid merchantId);
+        void Save(App app);
+        App Get(Guid id);
+        void Delete(Guid id);
+        List<App> Get();
         Task<App> GetApp(string justPayCode);
     }
 
     public class AppService : IAppService
     {
-        public void DeleteApp(Guid id)
+        private readonly IAppRepository repository;
+
+        public AppService()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var app = new App { Id = id };
-                db.Apps.Attach(app);
-                db.Entry(app).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
+            repository = new AppRepository();
         }
 
-        public App GetApp(Guid id)
+        public void Delete(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Apps.FirstOrDefault(q => q.Id == id);
-            }
+            repository.Delete(id);
         }
 
-        public List<App> GetApps()
+        public App Get(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Apps.ToList();
-            }
+            return repository.Get(id);
+        }
+
+        public List<App> Get()
+        {
+            return repository.Get();
         }
 
         public BankMerchant GetBankMerchant(Guid id)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.BankMerchants.Include(a=>a.Apps).FirstOrDefault(q => q.Id == id);
-            }
+            return repository.GetBankMerchant(id);
         }
 
         public void InsertBankMerchant(BankMerchant bm)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.BankMerchants.Add(bm);
-                db.SaveChanges();
-            }
+            repository.InsertBankMerchant(bm);
         }
 
-        public void InsertApp(App app)
+        public void Save(App app)
         {
-            using (var db = new ApplicationDbContext())
+            if (app.Id == new Guid())
             {
-                db.Apps.Add(app);
-                db.SaveChanges();
+                app.Id = Guid.NewGuid();
+                repository.Insert(app);
             }
-        }
-
-        public void UpdateApp(App app)
-        {
-            using (var db = new ApplicationDbContext())
+            else
             {
-                db.Apps.Attach(app);
-                db.Entry(app).State = EntityState.Modified;
-                db.SaveChanges();
+                repository.Update(app);
+
             }
         }
 
         public BankMerchant FindBankMerchant(Guid bankId, Guid merchantId)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.BankMerchants.Include(a => a.Apps).FirstOrDefault(q => q.BankId == bankId && q.MerchantId== merchantId);
-            }
+            return repository.FindBankMerchant(bankId, merchantId);
         }
 
-        public async Task <App> GetApp(string justPayCode)
+        public async Task<App> GetApp(string justPayCode)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return await db.Apps.FirstOrDefaultAsync(q => q.JustPayCode == justPayCode);
-            }
+            return await repository.GetApp(justPayCode);
         }
     }
 }

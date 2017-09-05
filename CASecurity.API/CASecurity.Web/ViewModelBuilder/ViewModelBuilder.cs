@@ -140,7 +140,7 @@ namespace CASecurity.Web.ViewModelBuilders
         public void SaveMerchant(MerchantModel model)
         {
             var mId = new Guid();
-            var isNew = Guid.TryParse(model.Id, out mId);
+            var isNotNew = Guid.TryParse(model.Id, out mId);
 
             var merchant = new Merchant
             {
@@ -155,6 +155,110 @@ namespace CASecurity.Web.ViewModelBuilders
             };
 
             _merchantService.Save(merchant);
+        }
+        #endregion
+
+        #region
+        public void SaveApp(AppModel model)
+        {
+            model.BMCode = model.Code;
+            var isExist = _appService.FindBankMerchant(new Guid(model.BankId), new Guid(model.MerchantId));
+            if (isExist == null)
+            {
+                var bMerchant = new BankMerchant
+                {
+                    Code = model.BMCode,
+                    BankId = new Guid(model.BankId),
+                    MerchantId = new Guid(model.MerchantId),
+                };
+                _appService.InsertBankMerchant(bMerchant);
+                model.BankMerchantId = bMerchant.Id.ToString();
+            }
+
+            if (string.IsNullOrEmpty(model.BankMerchantId))
+                model.BankMerchantId = isExist.Id.ToString();
+
+            //get bank
+            var bank = _bankService.Get(new Guid(model.BankId));
+            var bankCode = bank.Code;
+
+            //get merchant
+            var merchant = _merchantService.Get(new Guid(model.MerchantId));
+            var merchantCode = merchant.Code;
+            var app = new App
+            {
+                Code = model.Code,
+                BankMerchantId = new Guid(model.BankMerchantId),
+                Address = string.Empty,
+                Name = model.Name,
+                Package = model.Package,
+                PlatForm = model.PlatForm,
+                Production = string.Empty,
+                SandBox = string.Empty,
+                IsActive = true,
+                CreatedDateTime = DateTime.Now,
+                JustPayCode = string.Format("{0}_{1}_{2}", bankCode, merchantCode, model.Code),
+            };
+
+            _appService.Save(app);
+        }
+
+        public AppModel GetApp(string id)
+        {
+            var aId = new Guid();
+            var isNotNew = Guid.TryParse(id, out aId);
+            var model = new AppModel();
+
+            var a = _appService.Get(aId);
+
+            if(a != null)
+            {
+                model = new AppModel()
+                {
+                    Address = a.Address,
+                    Code = a.Code,
+                    BankMerchantId = a.BankMerchantId.ToString(),
+                    Name = a.Name,
+                    Package = a.Package,
+                    PlatForm = a.PlatForm,
+                    Production = a.Production,
+                    SandBox = a.SandBox,
+                    JustPayCode = a.JustPayCode,
+                    Id = a.Id.ToString(),
+                };
+            }
+            return model;
+        }
+
+        public ApplistModel GetAppList(string bankId, string merchantId)
+        {
+            var model = new ApplistModel
+            {
+                Apps = new List<AppModel>(),
+                BankId = bankId,
+                MerchantId = merchantId,
+            };
+
+            var isExist = _appService.FindBankMerchant(new Guid(bankId), new Guid(merchantId));
+            if (isExist != null)
+            {
+                model.Apps = (from a in isExist.Apps
+                              select new AppModel
+                              {
+                                  Id = a.Id.ToString(),
+                                  Address = a.Address,
+                                  Code = a.Code,
+                                  Name = a.Name,
+                                  Package = a.Package,
+                                  PlatForm = a.PlatForm,
+                                  Production = a.Production,
+                                  SandBox = a.SandBox,
+                                  JustPayCode = a.JustPayCode,
+                                  SDKIssuedDateTime = a.SDKIssuedDateTime
+                              }).ToList();
+
+            }
+            return model;
         }
         #endregion
     }

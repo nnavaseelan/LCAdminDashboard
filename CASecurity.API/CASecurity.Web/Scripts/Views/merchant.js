@@ -53,8 +53,8 @@
             success: function (data) {
                 debugger;
                 $("#createMerchant").html(data);
-                $('#myModal input:first-child').focus();
-                $('#myModal').modal();
+                $('#createMerchantModel input:first-child').focus();
+                $('#createMerchantModel').modal();
 
             },
             error: function () {
@@ -75,8 +75,8 @@
             success: function (data) {
                 debugger;
                 $("#createMerchant").html(data);
-                $('#myModal input:first-child').focus();
-                $('#myModal').modal();
+                $('#createMerchantModel input:first-child').focus();
+                $('#createMerchantModel').modal();
             },
             error: function () {
                 console.log("Dynamic content load failed.");

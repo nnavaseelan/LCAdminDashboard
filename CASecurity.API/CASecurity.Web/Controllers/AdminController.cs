@@ -182,6 +182,23 @@ namespace CASecurity.Web.Controllers
         }
         #endregion
 
+        #region Apps
+        public ActionResult AppList(string bankId, string merchantId)
+        {
+            var model = new ApplistModel();
+
+            try
+            {
+                model = _viewModelBuilder.GetAppList(bankId, merchantId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
+        }
+
         public ActionResult App(string id)
         {
             var model = new BankMerchantModel
@@ -208,9 +225,6 @@ namespace CASecurity.Web.Controllers
                                      Text = l.Name,
                                      Value = l.Id.ToString()
                                  }).ToList();
-
-
-
 
                 ViewBag.Banks = banks;
                 ViewBag.Merchants = merchants;
@@ -239,104 +253,102 @@ namespace CASecurity.Web.Controllers
             {
                 throw ex;
             }
+        }
 
+        //[HttpPost]
+        //public ActionResult App(AppModel model)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            model.BMCode = model.Code;
+        //            var isExist = _appService.FindBankMerchant(new Guid(model.BankId), new Guid(model.MerchantId));
+        //            if (isExist == null)
+        //            {
+        //                var merchant = new BankMerchant
+        //                {
+        //                    Code = model.BMCode,
+        //                    BankId = new Guid(model.BankId),
+        //                    MerchantId = new Guid(model.MerchantId),
+        //                };
+        //                _appService.InsertBankMerchant(merchant);
+        //                model.BankMerchantId = merchant.Id.ToString();
+        //            }
+
+        //            if (string.IsNullOrEmpty(model.BankMerchantId))
+        //                model.BankMerchantId = isExist.Id.ToString();
+
+        //            //get bank
+        //            var bankCode = _bankService.Get(new Guid(model.BankId)).Code;
+        //            //get merchant
+        //            var merchantCode = _merchantService.Get(new Guid(model.MerchantId)).Code;
+
+        //            var app = new App
+        //            {
+        //                Code = model.Code,
+        //                BankMerchantId = new Guid(model.BankMerchantId),
+        //                Address = string.Empty,
+        //                Name = model.Name,
+        //                Package = model.Package,
+        //                PlatForm = model.PlatForm,
+        //                Production = string.Empty,
+        //                SandBox = string.Empty,
+        //                IsActive = true,
+        //                CreatedDateTime = DateTime.Now,
+        //                JustPayCode = bankCode + "_" + merchantCode + "_" + model.Code,
+        //            };
+
+        //            _appService.Save(app);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //    return RedirectToAction("App");
+        //}
+
+        public ActionResult CreateApp(string id)
+        {
+            var model = new AppModel();
+            try
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    model = _viewModelBuilder.GetApp(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PartialView("_CreateApp", model);
         }
 
         [HttpPost]
-        public ActionResult App(AppModel model)
+        public ActionResult CreateApp(AppModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    model.BMCode = model.Code;
-                    var isExist = _appService.FindBankMerchant(new Guid(model.BankId), new Guid(model.MerchantId));
-                    if (isExist == null)
-                    {
-                        var merchant = new BankMerchant
-                        {
-                            Code = model.BMCode,
-                            BankId = new Guid(model.BankId),
-                            MerchantId = new Guid(model.MerchantId),
-                        };
-                        _appService.InsertBankMerchant(merchant);
-                        model.BankMerchantId = merchant.Id.ToString();
-                    }
-
-                    if (string.IsNullOrEmpty(model.BankMerchantId))
-                        model.BankMerchantId = isExist.Id.ToString();
-
-                    //get bank
-                    var bankCode = _bankService.Get(new Guid(model.BankId)).Code;
-                    //get merchant
-                    var merchantCode = _merchantService.Get(new Guid(model.MerchantId)).Code;
-
-                    var app = new App
-                    {
-                        Code = model.Code,
-                        BankMerchantId = new Guid(model.BankMerchantId),
-                        Address = string.Empty,
-                        Name = model.Name,
-                        Package = model.Package,
-                        PlatForm = model.PlatForm,
-                        Production = string.Empty,
-                        SandBox = string.Empty,
-                        IsActive = true,
-                        CreatedDateTime = DateTime.Now,
-                        JustPayCode = bankCode + "_" + merchantCode + "_" + model.Code,
-                    };
-
-                    _appService.InsertApp(app);
+                    _viewModelBuilder.SaveApp(model);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
             return RedirectToAction("App");
         }
+
+        #endregion
+
         public ActionResult Login()
         {
             return View();
-        }
-        public ActionResult AppList(string bankId, string merchantId)
-        {
-            var model = new ApplistModel
-            {
-                Apps = new List<AppModel>(),
-                BankId = bankId,
-                MerchantId = merchantId,
-            };
-
-            try
-            {
-                var isExist = _appService.FindBankMerchant(new Guid(bankId), new Guid(merchantId));
-                if (isExist != null)
-                {
-                    model.Apps = (from a in isExist.Apps
-                                  select new AppModel
-                                  {
-                                      Id = a.Id.ToString(),
-                                      Address = a.Address,
-                                      Code = a.Code,
-                                      Name = a.Name,
-                                      Package = a.Package,
-                                      PlatForm = a.PlatForm,
-                                      Production = a.Production,
-                                      SandBox = a.SandBox,
-                                      JustPayCode = a.JustPayCode,
-                                      SDKIssuedDateTime = a.SDKIssuedDateTime
-                                  }).ToList();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return View(model);
         }
 
         public ActionResult CheckBankCode(string code)

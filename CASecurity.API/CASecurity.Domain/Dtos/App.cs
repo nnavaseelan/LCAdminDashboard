@@ -21,7 +21,7 @@ namespace CASecurity.Domain.Dtos
         public DateTime CreatedDateTime { get; set; }
         public App()
         {
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
         }
     }
 }
