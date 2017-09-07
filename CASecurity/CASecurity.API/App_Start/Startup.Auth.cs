@@ -9,8 +9,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using CASecurity.API.Providers;
-using CASecurity.API.Models;
-using CASecurity.API.Migrations;
+using CASecurity.Domain.Migrations;
 
 namespace CASecurity.API
 {
