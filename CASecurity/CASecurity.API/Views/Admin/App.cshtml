@@ -1,0 +1,172 @@
+﻿@model CASecurity.API.Models.BankMerchantModel
+@{
+    ViewBag.Title = "App";
+}
+
+<script src="~/Scripts/Views/apps.js?=1.0"></script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <h4>Apps</h4>
+            <div class="well bs-component">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="Name" style="width:120px;"> Bank</label>
+                        @Html.DropDownList("BankId", new SelectList(ViewBag.Banks, "Value", "Text"), new { @class = "dropdown" })
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">                        
+                        <label for="Name" style="width:120px;">Merchants</label>
+                        @Html.DropDownList("MerchantId", new SelectList(ViewBag.Merchants, "Value", "Text"), new { @class = "dropdown" })
+                        <button id="btnAdd" class="btn btn-primary"><i class="fa fa-plus"></i>Add</button><br />
+                    </div>
+                </div>
+                @*<div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="BMCode" style="width:120px;">Code</label>
+                        <input type="text"  style="width:80px;" name="BMCode" placeholder="code" required maxlength="4">
+                    </div>
+                </div>*@
+
+                <div class="row">
+                    <h4>App List</h4><button id="btnAddApp" class="btn btn-primary pull-right">Add</button><br />
+                                     
+                </div>
+                <div class="row">
+                    <div id="divAppList"></div>   
+                </div>
+            </div>
+           -</div>
+    </div>
+
+</div>
+<!--Merchant Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Merchant</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Name">Bank :</label>
+                            <span id="spnBank"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Name"> Name</label>
+                            <input type="text" class="form-control" name="Name" placeholder="merchant name" required maxlength="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Code"> Code</label>
+                            <input type="text" class="form-control" name="Code" placeholder="merchant code" required maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label> Address</label>
+                            <input type="text" class="form-control" name="Address" placeholder="merchant address" required maxlength="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label> BRC</label>
+                            <input type="text" class="form-control" name="BRC" placeholder="brc" required maxlength="60">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnSave" type="submit" class="btn  btn-success">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--App Modal -->
+<div class="modal fade" id="myAppModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Application</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">                                       
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Name">App Name</label>
+                            <input type="text" class="form-control" name="AppName" placeholder="app name" required maxlength="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label for="Package">App Package</label>
+                            <input type="text" class="form-control" name="AppPackage" placeholder="package" required maxlength="50">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-lg-12">
+                            <label> Address</label>
+                            <input type="text" class="form-control" name="AppAddress" placeholder="app address" required maxlength="60">
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>App Code</label>
+                            <input type="text" class="form-control" name="AppCode" placeholder="code" required maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>App PlatForm</label>
+                            <input type="text" class="form-control" name="AppPlatForm" placeholder="platForm" required maxlength="60">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-lg-12">
+                            <label> Production</label>
+                            <input type="text" class="form-control" name="AppProduction" placeholder="production" required maxlength="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label> SandBox</label>
+                            <input type="text" class="form-control" name="AppSandBox" placeholder="sandBox" required maxlength="60">
+                        </div>
+                    </div>*@
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnAppSave" type="submit" class="btn  btn-success">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
