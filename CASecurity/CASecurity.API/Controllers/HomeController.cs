@@ -1,15 +1,9 @@
-﻿using CASecurity.API.Domain;
-using CASecurity.API.Migrations;
-using CASecurity.API.Models;
-using CASecurity.API.Providers;
-using CASecurity.API.Service;
+﻿using CASecurity.API.Providers;
+using CASecurity.Domain.Dtos;
+using CASecurity.Domain.Migrations;
+using CASecurity.Service;
 using Castle.Core.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 
 namespace CASecurity.API.Controllers

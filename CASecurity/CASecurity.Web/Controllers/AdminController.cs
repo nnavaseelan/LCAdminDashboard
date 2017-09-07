@@ -10,6 +10,7 @@ using CASecurity.Service;
 using CASecurity.Domain.Dtos;
 using System.Web;
 using CASecurity.Web.Utility;
+using PagedList;
 
 namespace CASecurity.Web.Controllers
 {
@@ -31,7 +32,7 @@ namespace CASecurity.Web.Controllers
         }
 
         #region Bank
-        public ActionResult Bank()
+        public ActionResult Bank(int? page)
         {
             var model = new List<BankModel>();
 
@@ -44,7 +45,7 @@ namespace CASecurity.Web.Controllers
                 throw ex;
             }
 
-            return View(model);
+            return View(model.ToPagedList(page ?? 1, Context.PageSize));
         }
 
         [HttpGet]
@@ -353,7 +354,7 @@ namespace CASecurity.Web.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     var path = UploadFileHelper.Save(id, file);
-                }                    
+                }
             }
             catch (Exception ex)
             {

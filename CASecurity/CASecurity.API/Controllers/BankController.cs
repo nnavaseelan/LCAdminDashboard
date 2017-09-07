@@ -1,14 +1,13 @@
-﻿using CASecurity.API.Domain;
-using CASecurity.API.Infrastructure;
-using CASecurity.API.Migrations;
-using CASecurity.API.Models;
+﻿using CASecurity.API.Models;
 using CASecurity.API.Providers;
-using CASecurity.API.Repository;
-using CASecurity.API.Service;
+using CASecurity.Domain.Dtos;
+using CASecurity.Domain.Migrations;
+using CASecurity.Domain.Repository;
+using CASecurity.Service;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
-using static CASecurity.API.Common.Enums;
+using static CASecurity.Common.Enums;
 
 namespace CASecurity.API.Controllers
 {
@@ -73,28 +72,28 @@ namespace CASecurity.API.Controllers
 
                 //map data
                 var challenge = MapCertificate(model);
-                var exiting = await _service.CheckChallenge(model);
-                if (exiting == null)
-                {
-                    challenge.UserDeviceLogs.Add(new UserDeviceLog
-                    {
-                        LogDateTime = DateTime.Now,
-                        Status = CallFrom.Bank.ToString(),
-                        UserDevice = challenge
-                    });
+                //var exiting = await _service.CheckChallenge(model);
+                //if (exiting == null)
+                //{
+                //    challenge.UserDeviceLogs.Add(new UserDeviceLog
+                //    {
+                //        LogDateTime = DateTime.Now,
+                //        Status = CallFrom.Bank.ToString(),
+                //        UserDevice = challenge
+                //    });
 
-                    //call service to store data 
-                    _service.InsertChallengeAsync(challenge);
+                //    //call service to store data 
+                //    _service.InsertChallengeAsync(challenge);
                   
-                    //map challenge token
-                    token.CertificateChallenge = challenge.CertificateChallenge.Trim();
-                    token.Status = APIResponseStatus.Success.ToString();
+                //    //map challenge token
+                //    token.CertificateChallenge = challenge.CertificateChallenge.Trim();
+                //    token.Status = APIResponseStatus.Success.ToString();
                    
-                    return Json(token);
-                }
+                //    return Json(token);
+                //}
 
-                token.CertificateChallenge = exiting.CertificateChallenge.ToString();
-                token.Status = APIResponseStatus.Success.ToString();
+                //token.CertificateChallenge = exiting.CertificateChallenge.ToString();
+                //token.Status = APIResponseStatus.Success.ToString();
                 
                 return Json(token);
 
@@ -117,11 +116,11 @@ namespace CASecurity.API.Controllers
       
         private async Task<bool> IsExistWithAllParameters(ApiModelNew model)
         {
-            var exiting = await _service.CheckChallenge(model);
-            if (exiting != null)
-            {
-                return true;
-            }
+            //var exiting = await _service.CheckChallenge(model);
+            //if (exiting != null)
+            //{
+            //    return true;
+            //}
 
             return false;
         }

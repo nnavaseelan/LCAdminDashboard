@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CASecurity.Web.Models.BankModel>
+﻿@using PagedList.Mvc
+@model PagedList.PagedList<CASecurity.Web.Models.BankModel>
 
 @{
     ViewBag.Title = "Bank";
@@ -54,6 +55,8 @@
                     }
                 </tbody>
             </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Bank", "Admin",  new { page }))
         </div>
     </div>
     <!-- Modal -->

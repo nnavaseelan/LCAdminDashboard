@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace CASecurity.Service
 {
@@ -28,6 +27,7 @@ namespace CASecurity.Service
         Task<App> GetPackageName(string justPayCode);
 
     }
+
     public class CAService: ICAService
     {
         public async void InsertChallengeAsync(UserDevice challenge)

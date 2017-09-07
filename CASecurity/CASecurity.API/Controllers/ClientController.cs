@@ -1,23 +1,12 @@
-﻿using CASecurity.API.Infrastructure;
-using CASecurity.API.Migrations;
-using CASecurity.API.Models;
-using CASecurity.API.Repository;
-using CASecurity.API.Service;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+﻿using CASecurity.API.Models;
+using CASecurity.Service;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using static CASecurity.API.Common.Enums;
+using static CASecurity.Common.Enums;
 
 namespace CASecurity.API.Controllers
 {

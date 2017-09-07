@@ -1,11 +1,7 @@
 ﻿using CASecurity.API.Infrastructure;
-using CASecurity.API.Migrations;
+using CASecurity.Domain.Migrations;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -21,7 +17,7 @@ namespace CASecurity.API
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //BundleConfig.RegisterBundles(BundleTable.Bundles);
             WindsorWrapper();
         }
         private static void WindsorWrapper()

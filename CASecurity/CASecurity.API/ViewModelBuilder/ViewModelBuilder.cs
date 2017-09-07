@@ -1,11 +1,7 @@
 ﻿using CASecurity.API.Models;
-using CASecurity.API.Service;
-using System;
+using CASecurity.Service;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-
 namespace CASecurity.API.ViewModelBuilders
 {
     public class ViewModelBuilder
@@ -23,7 +19,7 @@ namespace CASecurity.API.ViewModelBuilders
         public List<BankModel> GetBanks()
         {
             var model = new List<BankModel>();           
-            model = (from b in _service.GetBanks()
+            model = (from b in _service.Get()
                      select new BankModel
                      {
                          Id=b.Id.ToString(),
@@ -38,11 +34,12 @@ namespace CASecurity.API.ViewModelBuilders
 
             return model;
         }
+
         public List<MerchantModel> GetMerchants()
         {
             var model = new List<MerchantModel>();
-            model = (from m in _merchantService.GetMerchants()
-                     join b in _service.GetBanks() on m.BankId equals b.Id
+            model = (from m in _merchantService.Get()
+                     join b in _service.Get() on m.BankId equals b.Id
                      select new MerchantModel
                      {
                          Id = m.Id.ToString(),

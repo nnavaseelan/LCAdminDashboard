@@ -214,7 +214,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -291,6 +290,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CASecurity.Common\CASecurity.Common.csproj">
+      <Project>{8b08ee20-c819-43fd-899e-5febf48eda86}</Project>
+      <Name>CASecurity.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CASecurity.Domain\CASecurity.Domain.csproj">
       <Project>{3c04d7c8-4968-4b8d-b07c-8ecb18b82c7e}</Project>
       <Name>CASecurity.Domain</Name>
