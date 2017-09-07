@@ -8,6 +8,8 @@ using System;
 using System.IO;
 using CASecurity.Service;
 using CASecurity.Domain.Dtos;
+using System.Web;
+using CASecurity.Web.Utility;
 
 namespace CASecurity.Web.Controllers
 {
@@ -99,7 +101,6 @@ namespace CASecurity.Web.Controllers
             return RedirectToAction("Bank");
         }
         #endregion
-
 
         #region Merchant
         public ActionResult Merchant()
@@ -344,6 +345,23 @@ namespace CASecurity.Web.Controllers
             return RedirectToAction("App");
         }
 
+        [HttpPost]
+        public ActionResult UploadCSR(HttpPostedFileBase file, string id)
+        {
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    var path = UploadFileHelper.Save(id, file);
+                }                    
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return RedirectToAction("App");
+        }
         #endregion
 
         public ActionResult Login()
@@ -355,10 +373,12 @@ namespace CASecurity.Web.Controllers
         {
             return Json("true");
         }
+
         public ActionResult CheckMerchantCode(string bankId, string code)
         {
             return Json("true");
         }
+
         public ActionResult CheckAppCode(string bankId, string merchnatId, string code)
         {
             return Json("true");
@@ -368,6 +388,7 @@ namespace CASecurity.Web.Controllers
         {
             return Json("true");
         }
+
         private string CreateJson(string dataJson)
         {
             string appPath = Request.PhysicalApplicationPath;
@@ -399,6 +420,5 @@ namespace CASecurity.Web.Controllers
 
             return filePath;
         }
-
     }
 }

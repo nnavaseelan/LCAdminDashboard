@@ -19,6 +19,7 @@ namespace CASecurity.Domain.Dtos
 
         public bool IsActive { get; set; }
         public DateTime CreatedDateTime { get; set; }
+        public string FilePath { get; set; }
         public App()
         {
             //Id = Guid.NewGuid();

@@ -1,5 +1,4 @@
-﻿$(document).ready(function()
-{
+﻿$(document).ready(function () {
     loadAppList();
 
     $('#btnSave').click(function (e) {
@@ -45,7 +44,7 @@
     //        'SandBox': $('input[name=AppSandBox]').val(),
     //        'JustPayCode': '-'
     //    };
-    
+
     //    $.ajax({
     //        url: "/Admin/App",
     //        type: "post",
@@ -78,9 +77,9 @@
             error: function () {
                 console.log("Dynamic content load failed.");
             }
-        });        
+        });
     });
-    
+
     $('#btnAddApp').click(function () {
         //clearAppInputs();
         //$('#myAppModal').modal();
@@ -110,12 +109,67 @@
         });
     });
 
+    $('.btnEdit').click(function () {
+        debugger;
+        var id = $(this).data("id");
+        $.ajax({
+            type: "GET",
+            url: "/Admin/CreateApp",
+            contentType: "application/json; charset=utf-8",
+            data: { "Id": id },
+            datatype: "json",
+            success: function (data) {
+                debugger;
+                $("#createApp").html(data);
+
+                var selectedBank = $('#BankId option:selected').val();
+                $("#createAppModel").find("#BankId").val(selectedBank);
+
+                var selectedMerchant = $('#MerchantId option:selected').val();
+                $("#createAppModel").find("#MerchantId").val(selectedMerchant);
+
+                $('#createAppModel input:first-child').focus();
+                $('#createAppModel').modal();
+            },
+            error: function () {
+                console.log("Dynamic content load failed.");
+            }
+        });
+    });
+
     $('#MerchantId').change(function () {
         loadAppList();
     });
 
-    function loadAppList()
-    {
+    //$("#csrfile").fileupload({
+    //    autoUpload: true,
+    //    url: '/admin/UploadFile',
+    //    dataType: 'json',
+    //    add: function (e, data) {
+    //        var jqXHR = data.submit()
+    //            .success(function (data, textStatus, jqXHR) {
+    //                if (data.isUploaded) {
+
+    //                }
+    //                else {
+
+    //                }
+    //                alert(data.message);
+    //            })
+    //            .error(function (data, textStatus, errorThrown) {
+    //                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+    //                    alert(textStatus + errorThrown + data);
+    //                }
+    //            });
+    //    },
+    //    fail: function (event, data) {
+    //        if (data.files[0].error) {
+    //            alert(data.files[0].error);
+    //        }
+    //    }
+    //});
+
+    function loadAppList() {
         var bankId = $('#BankId').val();
         var merchantId = $('#MerchantId').val();
 

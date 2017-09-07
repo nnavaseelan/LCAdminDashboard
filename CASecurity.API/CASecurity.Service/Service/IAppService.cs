@@ -66,6 +66,16 @@ namespace CASecurity.Service
             else
             {
                 repository.Update(app);
+            }
+        }
+
+        public void SaveFile(string id, string filePath)
+        {
+            Guid aId = new Guid();
+            bool isValid = Guid.TryParse(id, out aId);
+
+            if (isValid)
+            {
 
             }
         }

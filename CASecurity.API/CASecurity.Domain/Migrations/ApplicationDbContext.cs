@@ -25,6 +25,7 @@ namespace CASecurity.Domain.Migrations
         public DbSet<App> Apps { get; set; }
         public DbSet<UserDeviceLog> UserDeviceLogs { get; set; }
         public DbSet<RequestLog> RequestLogs { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<AuditLogin> AuditLogins { get; set; }
     }
 }
